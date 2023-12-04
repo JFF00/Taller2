@@ -1,0 +1,58 @@
+Tiempo con poda alfabeta y 2 niveles de profundidad 
+1er Mov:0.001
+2do Mov:0.003
+3er Mov:0.002
+Tiempos con poda alfabete y 4 niveles de profundidad
+1er Mov:0.003
+2do Mov:0.005
+3er Mov:0.002
+Tiempos con poda alfabeta y 6 niveles de profundidad
+1er Mov:0.116
+2do Mov:0.122
+3er Mov:0.12
+Tiempos con poda alfabeta y 7 niveles de profundidad
+1er Mov:0.734
+2do Mov:0.83
+3er Mov:0.842
+Tiempos sin poda alfabeta y 2 niveles de profundidad
+1er Mov:0.024
+2do Mov:0.018
+3er Mov:0.02
+Tiempos sin poda alfabeta y 4 niveles de profundidad
+1er Mov:0.019
+2do Mov:0.024
+3er Mov:0.023
+Tiempos sin poda alfabeta y 6 niveles de profundidad
+1er Mov:0.688
+2do Mov:0.815
+3er Mov:0.821
+Tiempo sin poda alfabeta y 7 niveles de profundidad
+1er Mov:4.399
+2do Mov:5.386
+3er Mov:4.977
+Claramente los tiempos disminuyen en la poda alfabeta, aun más cuando se tratan de pocos niveles de profundidad, no se evaluan ramas que no significan incremento de la puntuacion.
+Desde 6 niveles de profundidad en adelante el tiempo aumenta significativamente, sobre 10 el programa demora minutos en responder. Los peores tiempos de una poda alfabeta son equivalentes
+a los mejores tiempos del minimax sin esta.
+
+
+Decisiones del codigo.
+En primer lugar cree la clase Ficha, que tenía como parametro su color, y todas se inicializaban con color "S/C". Funcionaba correctamente pero cuando se implementó minimax, 
+despues de 3 o 4 turnos, en el momento que la IA calculaba la mejor columna, el programa se caía con erorr de bad_alloc, asumí que era por las cantidades de memoria necesarias
+para la recursion y el uso de matrices de fichas copia que se creaban. Al cambiarlo por tabla de char, el problema se solucionó y los tiempos de carga mejoraron tambien.
+
+
+Funcion puntajeActual
+Se deciden los puntajes positivos para el jugador, mientras que los puntajes negativos para el segundo jugador o IA. Entre mas cantidad de fichas juntas más puntaje se tiene.
+
+Funcion guardarPartida
+Se pide al usuario ingresar un nombre y a este string se le agrega ".csv" como extension para completar el nombre necesario. Si no se especifica ruta se crean en carpeta donde se guarda
+el proyecto. Especificamente en output.
+
+Funcion cargarPartida
+Se abre el archivo y a cada linea se le asigna un valor de stringstream, el cual se divide, al estar en numeros se usan ifs para que cada numero sea equivalente a un char distinto.
+Se crean 7 char , uno para cada columna y asi estos varíen dentro del mismo while. Se usa un iterador i para ir rellenando filas dentro del mismo while.
+Dentro del mismo while se rellena el tablero que ingresa como parametro.
+
+añadirFicha() usa de parametro el tablero(tabla), numero de columna donde se quiere insertar una ficha y el turno. Si no hay espacio en la columna es -1, si no, El numero de la fila
+disponible en esa columna
+
